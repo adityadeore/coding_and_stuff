@@ -1,6 +1,8 @@
 /* 
   To build:
-  gcc -g spinalmatrix.c  -o spinalmatrix */
+  gcc -g spinalmatrix.c  -o spinalmatrix 
+  
+  This code prints a matrix in a spinal loop*/
 #include <stdio.h>
 #include <stdlib.h>
 
