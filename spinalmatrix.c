@@ -5,7 +5,7 @@
   This code prints a matrix in a spinal loop*/
 #include <stdio.h>
 #include <stdlib.h>
-
+//git testing
 /* test array */
 int spinalloop[3][4] = {1,2,3,11,4,5,6,12,7,8,9,13};
 
