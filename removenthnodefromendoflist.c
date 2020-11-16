@@ -48,8 +48,8 @@ struct ListNode* removeNthFromEnd(struct ListNode* head, int n)
     /* at this point the current->next should point to the elem to be removed*/
     current->next = current->next->next;
     return head;
-  }
 }
+
 void main()
 {
   struct ListNode head;
