@@ -8,8 +8,7 @@ struct ListNode
   struct ListNode *next;
 };
 
-struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2)
-{
+struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2){
   /* handle all NULL situations */
   if (l1 == NULL && l2 == NULL)
   {
@@ -30,6 +29,7 @@ struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2)
   struct ListNode *l2current = l2;
   struct ListNode *sumcurrent = NULL;
   struct ListNode *sumhead = NULL;
+
   int carryover = 0;
   int newval;
   /* add the numbers from head of the list  */
@@ -41,6 +41,10 @@ struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2)
       newval = newval - 10;
       carryover = 1;
     }
+    else
+    {
+      carryover = 0;  
+    }    
     /* malloc the memory */
     struct ListNode *node = malloc(sizeof(struct ListNode));
     node->val = newval;
@@ -67,13 +71,20 @@ struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2)
      2. l1 longer than l2
      3. l2 longer than l1 */
   /* case 1 */
-  if (l1current == NULL && l2current == NULL && carryover == 1 )
+  if (l1current == NULL && l2current == NULL)
   {
-    struct ListNode *node = malloc(sizeof(struct ListNode));
-    node->val = 1;
-    node->next = NULL;
-    sumcurrent->next = node;
-    return sumhead;
+    if (carryover == 1)
+    {    
+        struct ListNode *node = malloc(sizeof(struct ListNode));
+        node->val = 1;
+        node->next = NULL;
+        sumcurrent->next = node;
+        return sumhead;
+    }
+    else
+    {
+        return sumhead;
+    }
   }
   else if (l1current == NULL && l2current != NULL)
   {
@@ -86,6 +97,10 @@ struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2)
         newval = newval - 10;
         carryover = 1;
       }
+      else
+      {
+          carryover = 0;
+      }       
       /* malloc the memory */
       struct ListNode *node = malloc(sizeof(struct ListNode));
       node->val = newval;
@@ -118,6 +133,10 @@ struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2)
         newval = newval - 10;
         carryover = 1;
       }
+      else
+      {
+          carryover = 0;
+      }    
       /* malloc the memory */
       struct ListNode *node = malloc(sizeof(struct ListNode));
       node->val = newval;
@@ -141,9 +160,8 @@ struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2)
   }
   else
   {
-    return NULL;
-  }
-
+      return NULL;
+  }      
 }
 
 void main()
