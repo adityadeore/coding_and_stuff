@@ -49,7 +49,7 @@ try:
     
     try:
         password = driver.find_element(By.ID, "rec-acct-sign-in-password")
-        password.send_keys("2Jeopardy!")
+        password.send_keys("************")
     except Exception as e:
         print(f"Could not find password: {e}")
     # Example 1: Click a button by its ID
