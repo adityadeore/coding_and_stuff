@@ -1,3 +1,6 @@
+# install selenium from pip3 install selenium
+# press enter at the right time when the spots open up
+
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
@@ -6,6 +9,7 @@ from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
 import time
+import sys
 
 # Specify the path to your GeckoDriver executable
 # If geckodriver is in your PATH, you might not need this line or can simplify
@@ -79,10 +83,23 @@ try:
         driver.back()
         time.sleep(1)
     #wait to load the grid
-    input("Press Enter to continue...")
-    try:
+    campsite = input("Enter the campsite (rafferty/sunrise/cathedral): ")
+    if(campsite == 'rafferty'):
+        css_selector = ".rec-grid-row:nth-child(41) > .rec-grid-grid-cell:nth-child(12) .sarsa-button"
+        driver.execute_script("window.scrollBy(0, 1421);")
+    elif(campsite == 'sunrise'):
+        css_selector = ".rec-grid-row:nth-child(46) > .rec-grid-grid-cell:nth-child(12) .sarsa-button"
+        driver.execute_script("window.scrollBy(0, 1500);")
+    elif(campsite == 'cathedral'):
         css_selector = ".rec-grid-row:nth-child(8) > .rec-grid-grid-cell:nth-child(12) .sarsa-button"
-        #driver.execute_script("window.scrollBy(0, 1500);")
+    else:
+        print("Unsupported campsite")
+        driver.quit()
+        sys.exit(1)
+    epoch_time = input("Enter the epoch time at which you want to book : ")    
+    while(time.time() < epoch_time ):
+        time.sleep(1)
+    try:        
         hover_element = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, css_selector))) # Example for selenium.dev site
         actions = ActionChains(driver)
         actions.move_to_element(hover_element).perform()
